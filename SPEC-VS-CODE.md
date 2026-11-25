@@ -20,3 +20,7 @@ Status: MISMATCH, perlu cek di executor mana yang dipakai. Bisa jadi docs outdat
 - MAX_ACCOUNT_CHANGES_PER_TX = 1, bukan 256
 - MAX_CALL_PHASES_PER_TX = 1024, bukan calls
 - TxContext tidak punya get_caller()
+
+## HUNT-03 VERIFIKASI AKHIR - 25 Nov 2026 - CLOSED FINAL
+- affordability.rs: unaffordable() return true = unaffordable = skip. Kalau resolved_payer gagal, return true, jadi tx di-skip, bukan dimasukkan.
+- Kesimpulan: Semua 6 pemanggil resolved_payer aman. HUNT-03 ditutup final, tidak ada bug payer spoof.
