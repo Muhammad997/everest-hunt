@@ -29,8 +29,3 @@ Status: MISMATCH, perlu cek di executor mana yang dipakai. Bisa jadi docs outdat
 - Hipotesis: Version downgrade via caller, grant_role_unchecked bisa dipanggil siapa saja, scheduled multiplier bisa dimanipulasi
 - Bukti: versions.rs from_base_upgrade dari hardfork, bukan caller. dispatch grant_role_unchecked hanya untuk Factory bootstrap saat belum ada admin. grant_role normal cek ensure_role_admin_mutations_available + ensure_role sebelum manggil unchecked. updateUIMultiplier cek effective_at > now, <= u64::MAX, no live overlap, requires operator role jika tidak privileged, MAX = uint128.max, toUIAmount pakai effective multiplier.
 - Kesimpulan: B20 Asset version routing + role + scheduled multiplier sudah benar. Tutup HUNT-04.
-
-## HASIL HUNT-04 - 25 Nov 2026 - CLOSED, BUKAN BUG
-- Hipotesis: Version downgrade via caller, grant_role_unchecked bisa dipanggil siapa saja, scheduled multiplier bisa dimanipulasi
-- Bukti: versions.rs from_base_upgrade dari hardfork, bukan caller. dispatch grant_role_unchecked hanya untuk Factory bootstrap saat belum ada admin. grant_role normal cek ensure_role_admin_mutations_available + ensure_role sebelum manggil unchecked. updateUIMultiplier cek effective_at > now, <= u64::MAX, no live overlap, requires operator role jika tidak privileged, MAX = uint128.max, toUIAmount pakai effective multiplier.
-- Kesimpulan: B20 Asset version routing + role + scheduled multiplier sudah benar. Tutup HUNT-04.
