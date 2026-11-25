@@ -4,6 +4,12 @@
 - Kesimpulan: Kode konsisten pakai [0x79, 0x00] / [0x79, 0x01] / [0x79, 0x02]. Docs yang outdated.
 - Status: JANGAN jadikan laporan. Tutup hipotesis ini.
 
+## HASIL HUNT-02 - 25 Nov 2026 - CLOSED, BUKAN BUG
+- Hipotesis: Executor tidak implement phase, atau phase yang revert tidak di-skip
+- Bukti: base_tx.rs baris 1243 loop per phase, checkpoint_commit, committed_phases += 1, phase_reverted -> skip semua phase berikutnya. Test later_phase_skipped_after_earlier_phase_reverts dan committed_phase_warms_later_phase lolos di kode.
+- Thread-local TxBaseCommittedPhases sudah ada clear() di awal execute dan set() di akhir, untuk cegah misattribution antar tx.
+- Kesimpulan: Phase handling sudah benar. Tutup hipotesis ini.
+
 # Spec vs Code - Status: Belum Bisa Dibilang Bug
 ## Mismatch 1 - Signature Prefix
 Kode: SENDER [0x79, 0x00], PAYER [0x79, 0x01], REPLAY [0x79, 0x02]
