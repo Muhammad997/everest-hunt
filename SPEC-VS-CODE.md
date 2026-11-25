@@ -34,3 +34,8 @@ Status: MISMATCH, perlu cek di executor mana yang dipakai. Bisa jadi docs outdat
 - Hipotesis: Composite bisa circular / nested, inverted bisa bypass deny
 - Bukti: require_child_policy_in_range [2,4], validate 2-pass PolicyNotFound > InvalidChildPolicy, child harus simple custom, builtin/composite ditolak. V3 inverted = XOR bit, base_policy_id strip sebelum cek, inverted composite ditolak, inverted unknown fails closed, inverted negate simple/composite/builtin.
 - Kesimpulan: Policy composite + inverted sudah benar. Tutup HUNT-05.
+
+## HASIL HUNT-06 - 25 Nov 2026 - CLOSED, BUKAN BUG
+- Hipotesis: Variant bisa dipilih caller untuk bypass, activation bisa re-call untuk reset
+- Bukti: Variant hanya Asset=0/Stablecoin=1, from_abi/from_discriminant tolak invalid, getB20Address revert untuk invalid variant. create_b20_decoded: from_abi -> ensure_activated(variant.activation_feature) -> decode -> check_version==1. Activation set_activated: activate yang sudah active revert, deactivate yang sudah inactive revert, repeated_transition_reverts, require_admin_caller.
+- Kesimpulan: Factory Variant + Activation sudah benar. Tutup HUNT-06.
