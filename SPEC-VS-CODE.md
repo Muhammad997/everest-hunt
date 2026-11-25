@@ -1,3 +1,9 @@
+## HASIL HUNT-01 - 25 Nov 2026 - CLOSED, BUKAN BUG
+- Hipotesis: Payer pakai 0x7A, sender pakai 0x79, mismatch
+- Bukti git grep: Tidak ada 0x7A di base_tx / evm/base_tx.rs
+- Kesimpulan: Kode konsisten pakai [0x79, 0x00] / [0x79, 0x01] / [0x79, 0x02]. Docs yang outdated.
+- Status: JANGAN jadikan laporan. Tutup hipotesis ini.
+
 # Spec vs Code - Status: Belum Bisa Dibilang Bug
 ## Mismatch 1 - Signature Prefix
 Kode: SENDER [0x79, 0x00], PAYER [0x79, 0x01], REPLAY [0x79, 0x02]
